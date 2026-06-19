@@ -90,7 +90,7 @@ with gr.Blocks(title="Multimodal AI Assistant", theme=gr.themes.Soft()) as app:
             fused_prompt_out = gr.Textbox(label="Fused Prompt / Multimodal Context", lines=4, interactive=False)
             
             gr.Markdown("### Final Synthesized Response")
-            final_resp_out = gr.Textbox(label="AI Response (GPT-4o-mini)", lines=5, interactive=False)
+            final_resp_out = gr.Textbox(label="AI Response (Groq Llama 3)", lines=5, interactive=False)
             audio_out = gr.Audio(label="Spoken Response (Coqui TTS)", interactive=False)
 
     submit_btn.click(

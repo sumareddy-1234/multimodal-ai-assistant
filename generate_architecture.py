@@ -26,7 +26,7 @@ def create_architecture_diagram():
         
         "Prompt Builder\n(Multimodal Fusion)": (450, 250, 600, 300),
         
-        "GPT-4o-mini": (650, 250, 750, 300),
+        "Groq Llama 3": (650, 250, 750, 300),
         
         "Final Text\nResponse": (650, 150, 750, 200),
         "Coqui TTS\n(Optional)": (650, 350, 750, 400),
@@ -54,9 +54,9 @@ def create_architecture_diagram():
     draw_arrow((200, 475), (250, 475)) # Audio -> Whisper
     draw_arrow((400, 475), (525, 300)) # Whisper -> Fusion
     
-    draw_arrow((600, 275), (650, 275)) # Fusion -> GPT
-    draw_arrow((700, 250), (700, 200)) # GPT -> Text Out
-    draw_arrow((700, 300), (700, 350)) # GPT -> TTS
+    draw_arrow((600, 275), (650, 275)) # Fusion -> LLM
+    draw_arrow((700, 250), (700, 200)) # LLM -> Text Out
+    draw_arrow((700, 300), (700, 350)) # LLM -> TTS
     draw_arrow((700, 400), (700, 450)) # TTS -> Audio Out
     
     # Save the image
