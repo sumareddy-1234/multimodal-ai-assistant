@@ -38,7 +38,7 @@ def test_imports():
         import modules.image_processor
         import modules.audio_processor
         import modules.llm_processor
-        import modules.tts_processor
+
         assert True
     except Exception as e:
         pytest.fail(f"Failed to import a module: {e}")

@@ -4,7 +4,6 @@ from modules.image_processor import ImageProcessor
 from modules.audio_processor import AudioProcessor
 from modules.prompt_builder import build_multimodal_prompt
 from modules.llm_processor import LLMProcessor
-from modules.tts_processor import TTSProcessor
 
 print("Initializing AI Models... This may take a moment.")
 # Initialize models
@@ -25,12 +24,6 @@ except Exception as e:
 llm_processor = LLMProcessor()
 print("LLM model initialized.")
 
-try:
-    tts_processor = TTSProcessor()
-    print("TTS model loaded.")
-except Exception as e:
-    print(f"Error loading TTS model: {e}")
-    tts_processor = None
 
 
 def process_multimodal_input(text_input, image_input, audio_input):
@@ -62,13 +55,7 @@ def process_multimodal_input(text_input, image_input, audio_input):
     # Generate LLM Response
     llm_response = llm_processor.generate_response(final_prompt)
 
-    # Optional TTS
-    audio_output = None
-    if tts_processor and "Error" not in llm_response:
-        output_path = "output_audio.wav"
-        audio_output = tts_processor.synthesize_speech(llm_response, output_path)
-
-    return image_caption, audio_transcript, final_prompt, llm_response, audio_output
+    return image_caption, audio_transcript, final_prompt, llm_response
 
 
 # Gradio Interface setup
@@ -91,12 +78,11 @@ with gr.Blocks(title="Multimodal AI Assistant", theme=gr.themes.Soft()) as app:
             
             gr.Markdown("### Final Synthesized Response")
             final_resp_out = gr.Textbox(label="AI Response (Groq Llama 3)", lines=5, interactive=False)
-            audio_out = gr.Audio(label="Spoken Response (Coqui TTS)", interactive=False)
 
     submit_btn.click(
         fn=process_multimodal_input,
         inputs=[text_in, image_in, audio_in],
-        outputs=[image_cap_out, audio_trans_out, fused_prompt_out, final_resp_out, audio_out]
+        outputs=[image_cap_out, audio_trans_out, fused_prompt_out, final_resp_out]
     )
 
 if __name__ == "__main__":

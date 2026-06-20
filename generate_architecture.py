@@ -28,9 +28,7 @@ def create_architecture_diagram():
         
         "Groq Llama 3": (650, 250, 750, 300),
         
-        "Final Text\nResponse": (650, 150, 750, 200),
-        "Coqui TTS\n(Optional)": (650, 350, 750, 400),
-        "Final Audio\nResponse": (650, 450, 750, 500)
+        "Final Text\nResponse": (650, 150, 750, 200)
     }
     
     # Draw boxes and text
@@ -56,8 +54,6 @@ def create_architecture_diagram():
     
     draw_arrow((600, 275), (650, 275)) # Fusion -> LLM
     draw_arrow((700, 250), (700, 200)) # LLM -> Text Out
-    draw_arrow((700, 300), (700, 350)) # LLM -> TTS
-    draw_arrow((700, 400), (700, 450)) # TTS -> Audio Out
     
     # Save the image
     image.save('assets/architecture.png')

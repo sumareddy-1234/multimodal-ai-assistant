@@ -7,9 +7,8 @@ The Multimodal AI Assistant is a Python-based application that processes Text, I
 - **Accepts Multiple Modalities**: Text, Image (JPG/PNG), Audio (WAV/MP3).
 - **Supports Combinations**: Text+Image, Text+Audio, Image+Audio, Text+Image+Audio.
 - **Image Processing**: Uses Salesforce BLIP Base to generate image captions.
-- **Audio Processing**: Uses OpenAI Whisper Base to transcribe audio into text.
-- **Unified Reasoning**: Fuses inputs and queries OpenAI GPT-4o-mini to generate an answer.
-- **Optional Text-to-Speech**: Synthesizes the generated text response back into spoken audio using Coqui TTS.
+- **Audio Processing**: Uses Whisper Base to transcribe audio into text.
+- **Unified Reasoning**: Fuses inputs and queries Groq Llama 3 to generate an answer.
 
 ## Architecture
 
@@ -20,11 +19,10 @@ graph TD
     C --> E
     D[User Audio] -->|Whisper Model| F[Audio Transcript]
     F --> E
-    E --> G[GPT-4o-mini]
+    E --> G[Groq Llama 3]
     G --> H[Final Text Response]
-    H --> I[Coqui TTS Optional]
-    I --> J[Final Audio Response]
 ```
+
 
 ## Installation Instructions
 
@@ -48,14 +46,34 @@ pip install -r requirements.txt
 ```
 
 4. **Environment Variables Setup**:
-Copy the example environment file and set your OpenAI API key:
+Copy the example environment file and set your Groq API key:
 ```bash
 cp .env.example .env
 ```
-Edit the `.env` file and replace `your_openai_api_key_here` with your actual OpenAI API key.
+Edit the `.env` file and replace `your_groq_api_key_here` with your actual Groq API key.
 
-## How to Run
+## Running with Docker
+
+You can run the application seamlessly using Docker. This avoids local dependency conflicts.
+
+1. **Build the image**:
+```bash
+docker build -t multimodal-ai-assistant .
+```
+
+2. **Run the container**:
+Ensure you have created your `.env` file as described above so Docker can inject your `GROQ_API_KEY`.
+```bash
+docker run -p 7860:7860 --env-file .env multimodal-ai-assistant
+```
+
+3. **Open the interface**:
+Navigate to `http://localhost:7860` in your web browser.
+
+## How to Run Locally
+
 Execute the following command from the root directory:
+
 ```bash
 python app.py
 ```

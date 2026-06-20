@@ -6,7 +6,7 @@ torchaudio>=2.3.0
 Pillow>=10.3.0
 groq>=0.28.0
 python-dotenv>=1.0.1
-# TTS>=0.22.0 (Requires Python < 3.12)
+
 soundfile>=0.12.1
 librosa>=0.10.2
 pytest>=8.2.0
